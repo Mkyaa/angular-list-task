@@ -1,0 +1,46 @@
+.top-bar{
+    @apply w-full h-16
+    fixed top-0 right-0
+    bg-white flex items-center justify-between
+    border-b border-solid border-gray-200
+    shadow-box-bottom-shadow
+    z-10
+}
+
+.searchBox{
+    @apply hidden w-full h-16 
+    sm:flex flex-1 justify-center items-center
+    pl-20 md:pl-0 
+}
+
+.inputBox{
+    @apply sm:w-64 h-8 relative 
+}
+
+.inputBox input{
+    @apply w-full h-8 px-4 py-2
+    border border-gray-300
+    rounded-lg 
+    transition duration-300 ease-in-out
+    outline-none focus:border-blue-500
+    text-sm text-gray-700
+}
+
+.inputBox svg{
+    @apply absolute top-2 right-2
+    text-gray-400 
+}
+
+.profileBox{
+    @apply w-full sm:w-auto md:w-64 h-16
+    flex items-center justify-end
+    gap-3 px-6
+}
+
+.profileBox img{
+    @apply w-8 h-8 rounded-full
+}
+
+.profileBox h3{
+    @apply text-xs
+}

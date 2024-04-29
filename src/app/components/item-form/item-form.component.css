@@ -1,0 +1,91 @@
+.itemFormContainer{
+    @apply w-full min-h-screen
+    fixed top-0 left-0
+    bg-gray-900 bg-opacity-40
+    z-50
+    flex items-center justify-center
+}
+
+.itemFormBox{
+    @apply w-full max-w-lg min-w-72 bg-white
+    rounded-xl shadow-lg
+    p-6
+    flex flex-col
+}
+
+.formHeader{
+    @apply relative py-4
+    text-center 
+    border-b border-solid border-gray-300
+}
+
+.formHeader h1{
+    @apply  text-2xl font-medium text-gray-500
+}
+
+.formHeader i{
+    @apply absolute top-3 right-3
+    text-3xl text-gray-300
+    cursor-pointer
+    transition duration-300 ease-in-out
+    hover:text-gray-500
+}
+
+.itemForm{
+    @apply flex flex-col mt-8
+}
+
+.formGroup{
+    @apply mb-4
+}
+
+.formGroup label{
+    @apply text-sm font-medium text-[#6C6C6C] 
+}
+
+.formGroup input{
+    @apply w-full p-2
+    border border-gray-300
+    rounded-lg outline-none
+    transition duration-500 ease-in-out
+}
+
+.formGroup input:focus{
+    @apply shadow-md shadow-blue-400
+}
+
+.formBtnGroup{
+    @apply flex flex-col mt-8
+    gap-3
+}
+
+.formBtnGroup button{
+    @apply w-full py-3
+    rounded-lg
+    cursor-pointer outline-none
+}
+
+.formBtnGroup button[type="submit"]{
+    @apply bg-blue-500 text-white
+}
+
+.formBtnGroup button[type="submit"]:hover{
+    @apply bg-blue-600
+}
+
+.formBtnGroup button[type="submit"]:focus{
+    @apply bg-blue-600
+}
+
+.formBtnGroup button[type="button"]{
+    @apply bg-gray-100 text-gray-500
+    border border-solid border-gray-300 
+}
+
+.formBtnGroup button[type="button"]:hover{
+    @apply bg-gray-200
+}
+
+.formBtnGroup button[type="button"]:focus{
+    @apply bg-gray-200
+}

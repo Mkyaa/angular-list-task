@@ -1,0 +1,71 @@
+
+.loginContainer{
+    @apply w-full min-h-screen flex justify-center items-center
+    bg-bg-primary
+}
+
+.signForm{
+    @apply w-full mx-2 sm:mx-0 sm:w-[475px] h-[550px] 
+    bg-white rounded-[20px] shadow-lg 
+    flex flex-col justify-center items-center
+}
+
+.signLogo{
+    @apply text-2xl sm:text-[32px] 
+    border-l-[6px] border-solid border-bg-secondary
+     pl-[10px] mt-2 font-bold 
+     flex items-center leading-[39px]
+}
+
+.signTitle{
+    @apply sm:text-[22px] 
+    font-semibold text-lg 
+    mt-10 leading-[27px] 
+}
+
+.signSubtitle{
+    @apply text-xs text-center sm:text-[14px] text-[#6C6C6C] 
+    mt-3 mb-5 
+    leading-[17px] 
+}
+
+.signInputContainer{
+    @apply w-full sm:px-0 sm:w-[415px] h-[71px]
+     flex flex-col justify-between 
+     mt-5 px-3 
+}
+
+.signInputContainer input {
+    @apply w-full h-11 px-3 
+    text-base rounded-[4px]
+    border border-solid border-[#E5E5E5] 
+    placeholder:text-xs placeholder:text-[#CDCDCD]
+}
+
+.signInputContainer input:focus{
+    @apply outline-none border-[2px] border-solid  border-bg-secondary
+}
+
+.signInputContainer label{
+    @apply text-[14px] text-[#6C6C6C] font-medium
+}
+
+.signButton{
+    @apply w-[96%] mx-auto sm:w-[415px] h-11 rounded-[4px] 
+    bg-bg-secondary text-white text-[14px] font-medium 
+    mt-8
+}
+
+.checkBoxContainer{
+    @apply w-full sm:px-0 sm:w-[415px]
+    flex
+    mt-5 px-3 gap-2
+}
+
+.checkBoxContainer input{
+    @apply w-6 h-6
+}
+
+.checkBoxContainer label{
+    @apply text-[14px] text-[#6C6C6C] 
+}

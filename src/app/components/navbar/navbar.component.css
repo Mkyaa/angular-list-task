@@ -1,0 +1,105 @@
+.navbarContainer {
+  @apply hidden fixed top-0 left-0 z-20
+  md:flex md:flex-col md:w-64 h-full min-h-screen;
+}
+
+.logoBar {
+  @apply bg-white w-full min-h-16 flex items-center
+    px-6 gap-2 z-10
+    font-semibold text-lg
+    border-b border-solid border-gray-200
+    shadow-box-bottom-shadow;
+}
+
+.navLinks {
+  @apply flex flex-col 
+    gap-2 p-2 mt-4;
+}
+
+.navLink {
+  @apply rounded-md w-full h-12 flex items-center
+    px-6 gap-2 cursor-pointer
+    text-gray-600 hover:bg-gray-200
+    transition-all duration-300 ease-in-out;
+}
+
+.navLink i {
+  @apply text-sm;
+}
+
+.active {
+  @apply w-full h-12 rounded-md 
+  bg-light-blue text-normal-blue;
+}
+
+.logout {
+  @apply w-full h-12 
+    flex items-center justify-center
+    px-6 gap-2 mt-auto
+    cursor-pointer rounded-md
+    text-gray-600 hover:bg-gray-200;
+}
+
+/* MOBILE MENU */
+.mobile_menuOpenBtn {
+  @apply fixed left-10 top-0 
+    md:hidden flex items-center
+    w-16 h-16 z-20
+    cursor-pointer
+    text-gray-600 text-3xl;
+}
+
+.mobile_navbarContainer {
+  @apply md:hidden w-full h-full min-h-screen
+    overflow-auto z-20
+    fixed top-0 left-0
+    bg-bg-thirdary
+    transition-all duration-300 ease-in-out;
+}
+
+.mobile_menuCloseBtn {
+  @apply fixed right-0 top-0
+    md:hidden flex items-center justify-center
+    w-16 h-24 z-30
+    cursor-pointer
+    text-gray-500 text-3xl;
+}
+
+.mobile_logoBar {
+  @apply bg-white w-full h-24 
+    flex justify-center items-center
+    px-6 gap-2
+    font-semibold text-lg;
+}
+
+.mobile_navLinks {
+  @apply flex flex-col justify-center items-center
+    gap-2 p-2 mt-4
+}
+
+.mobile_navLink {
+  @apply w-full h-20 
+    flex items-center justify-center
+    px-6 gap-2 
+    cursor-pointer rounded-md
+    text-gray-600 hover:bg-gray-200 text-lg
+    transition-all duration-300 ease-in-out
+
+}
+
+.mobile_navLink i {
+  @apply text-lg;
+}
+
+.mobile_active {
+  @apply w-full h-20 rounded-md 
+  bg-light-blue text-normal-blue;
+}
+
+.mobile_logout {
+  @apply w-full h-20 
+    flex items-center justify-center
+    px-6 gap-2 mt-10
+    cursor-pointer rounded-md
+    text-gray-600 hover:bg-gray-200 text-lg;
+}

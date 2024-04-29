@@ -1,0 +1,53 @@
+<div class="itemFormContainer" *ngIf="showForm">
+    <div class="itemFormBox">
+        <div class="formHeader">
+            <h1>
+                {{
+                operationType === 'add'
+                ? 'Malzeme Ekle'
+                : operationType === 'edit'
+                ? 'Malzeme Güncelle'
+                : 'Silmek istediğinize emin misiniz?'
+                }}
+            </h1>
+            <i class="fa fa-times" (click)="closeForm.emit()"></i>
+        </div>
+        <form class="itemForm" (submit)="
+        operationType === 'add' 
+        ? addItem.emit(item) 
+        : operationType === 'edit'
+        ? updateItem.emit(item)
+        : deleteItem.emit(item)
+        ">
+            <div class="formGroup" *ngIf="operationType !== 'delete'">
+                <label for="code">Malzeme Kodu</label>
+                <input type="text" id="code" name="code" [(ngModel)]="item.code" required />
+            </div>
+            <div class="formGroup" *ngIf="operationType !== 'delete'">
+                <label for="name">Malzeme Tanımı</label>
+                <input type="text" id="name" name="name" [(ngModel)]="item.name" required />
+            </div>
+            <div class="formGroup" *ngIf="operationType !== 'delete'">
+                <label for="unitsetCode">Birim Set Kodu</label>
+                <input type="text" id="unitsetCode" name="unitsetCode" [(ngModel)]="item.unitsetCode" required />
+            </div>
+            <div class="formGroup" *ngIf="operationType !== 'delete'">
+                <label for="auxilCode">Yardımcı Kod</label>
+                <input type="text" id="auxilCode" name="auxilCode" [(ngModel)]="item.auxilCode" required />
+            </div>
+            <div class="formBtnGroup">
+                <button type="submit">
+                    {{
+                    operationType === 'add'
+                    ? 'Ekle'
+                    : operationType === 'edit'
+                    ? 'Güncelle'
+                    : 'Sil'
+                    }}
+                </button>
+                <button type="button" (click)="closeForm.emit()">İptal</button>
+            </div>
+        </form>
+    </div>
+
+</div>

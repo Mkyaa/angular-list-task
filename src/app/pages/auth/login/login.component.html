@@ -1,0 +1,43 @@
+<div class="loginContainer">
+    <form class="signForm" (ngSubmit)="login($event)">
+        <h1 class="signLogo">IES YAZILIM</h1>
+        <h2 class="signTitle">Giriş Yap</h2>
+        <span class="signSubtitle">Bilgileri görebilmek için giriş yapınız</span>
+        <div class="signInputContainer">
+            <article class="signErrBox">
+                <label htmlFor="email">Email ya da Kullanıcı Adı</label>
+            </article>
+            <input 
+            id="email" 
+            type="email" 
+            placeholder="Kullanıcı Adı veya Email Giriniz" 
+            name="email"
+            [(ngModel)]="user.userNameOrEmailAddress"
+            />
+        </div>
+        <div class="signInputContainer">
+            <article class="signErrBox">
+                <label htmlFor="password">Şifre</label>
+            </article>
+            <input 
+            id="password" 
+            type="password" 
+            placeholder="Şifrenizi Giriniz" 
+            name="password" 
+            [(ngModel)]="user.password"
+            />
+        </div>
+        <div class="checkBoxContainer">
+            <input 
+            type="checkbox" 
+            id="rememberMe" 
+            name="rememberMe" 
+            [(ngModel)]="user.rememberMe"
+            />
+            <label for="rememberMe">Beni Hatırla</label>
+        </div>
+        <Button type="submit" class="signButton">
+            GİRİŞ YAP
+        </Button>
+    </form>
+  </div>

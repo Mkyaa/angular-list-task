@@ -1,0 +1,178 @@
+.itemsContainer{
+    @apply w-full h-full 
+    flex flex-col items-center
+    gap-4 p-8
+    overflow-hidden
+}
+
+.topBox{
+    @apply w-full max-w-7xl py-4
+    flex flex-col sm:flex-row items-center justify-between
+    gap-2 
+}
+
+.addBtn{
+    @apply w-full sm:w-48 h-10 
+    flex items-center justify-center
+    gap-3
+    bg-normal-blue text-white
+    rounded-md
+    cursor-pointer
+}
+
+.addBtn:hover{
+    @apply bg-blue-700
+}
+
+.searchBox{
+    @apply w-full sm:w-80 h-10 relative
+    flex items-center justify-end
+}
+
+.searchBox input{
+    @apply w-full h-10 pl-8 pr-4 py-2
+    border border-gray-300 rounded-md
+    transition duration-300 ease-in-out
+    outline-none focus:border-blue-500
+    text-sm text-gray-700 
+    z-0
+}
+
+.searchBox i{
+    @apply absolute top-3 left-2
+    text-gray-400
+}
+
+.itemsList{
+    @apply w-full max-w-7xl h-full
+    flex flex-col gap-4
+    rounded-md
+    overflow-x-auto
+}
+
+table{
+    @apply w-full 
+}
+
+thead{
+    @apply w-full
+}
+
+th{
+    @apply h-14 min-w-32
+    bg-[#edf2f7]
+    text-left text-xs text-gray-500
+    pl-4
+}
+
+tbody{
+    @apply w-full
+    border-y border-gray-300
+}
+
+tr{
+    @apply h-14
+    bg-white
+}
+
+tr:nth-child(even){
+    @apply bg-bg-thirdary
+}
+
+td{
+    @apply min-w-32
+    text-left text-sm text-gray-700
+    pl-4
+    border-b border-gray-100
+}
+
+#cardTypeDefinition{
+    @apply text-xs px-[5px] py-[2px] 
+    rounded-2xl text-center
+}
+
+.actions{
+    @apply min-w-32
+    flex gap-3
+}
+
+.editBtn, .deleteBtn{
+    @apply w-8 h-8
+    flex items-center justify-center
+    cursor-pointer
+    border border-gray-200
+    bg-light-gray
+}
+
+.editBtn:hover{
+    @apply border-normal-blue text-normal-blue
+}
+
+.deleteBtn{
+    @apply border-red-300 text-red-300
+}
+
+.deleteBtn:hover{
+    @apply border-red-600 text-red-600
+}
+
+tfoot{
+    @apply w-full
+}
+
+tfoot tr{
+    @apply h-14
+    bg-[#edf2f7]
+}
+
+tfoot td{
+    @apply w-full
+    text-right text-sm text-gray-700
+    pr-4
+}
+
+.pagination{
+    @apply w-full
+    flex items-center justify-end
+    gap-10
+}
+
+.pageInfo{
+    @apply text-sm text-gray-700
+    flex items-center 
+    gap-3
+}
+
+.pageInfo i{
+    @apply text-lg cursor-pointer
+}
+
+.pageInfo #currentPage{
+    @apply w-8 h-8
+    flex items-center justify-center
+    bg-[#edf2f7] text-gray-700 text-right
+    rounded-md
+}
+
+.pageSelect{
+    @apply flex items-center justify-center
+    gap-2
+    bg-[#edf2f7] text-gray-700
+    rounded-md
+    cursor-pointer
+}
+
+.pageSelect select{
+    @apply bg-white border-none
+    outline-none
+}
+
+.pageSelect select option{
+    @apply bg-white
+}
+
+
+
+
+
+

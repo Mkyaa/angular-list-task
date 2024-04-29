@@ -1,0 +1,50 @@
+<div class="navbarContainer">
+    <div class="logoBar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path fill="#1677FF" fill-rule="evenodd"
+                d="M12 24c6.627 0 12-5.373 12-12S18.627 0 12 0 0 5.373 0 12s5.373 12 12 12Zm3.744-18.41c.182-.647-.446-1.03-1.02-.621l-8.008 5.705c-.622.443-.524 1.326.147 1.326h2.109v-.016h4.11l-3.35 1.181-1.476 5.245c-.182.647.446 1.03 1.02.621l8.008-5.705c.622-.443.524-1.326-.147-1.326H13.94l1.805-6.41Z"
+                clip-rule="evenodd"></path>
+        </svg>
+        <h3>IES Yazılım</h3>
+    </div>
+    <ul class="navLinks">
+        <li *ngFor="let item of navItems" [routerLink]="item.link" routerLinkActive="active" class="navLink">
+            <i ngClass="{{item.icon}}"></i>
+            <span>{{item.title}}</span>
+        </li>
+    </ul>
+    <div class="logout" (click)="logout()">
+        <i class="fa-solid fa-sign-out"></i>
+        <span>Çıkış Yap</span>
+    </div>
+</div>
+
+<!-- MOBILE MENU -->
+<div class="mobile_menuOpenBtn" (click)="toggleMobileMenu()">
+    <i class="fa-solid fa-bars"></i>
+</div>
+<div class="mobile_menuCloseBtn" (click)="toggleMobileMenu()" *ngIf="isMobileMenuOpen">
+    <i class="fa-solid fa-times"></i>
+</div>
+<div class="mobile_navbarContainer" *ngIf="isMobileMenuOpen">
+    <div class="mobile_logoBar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path fill="#1677FF" fill-rule="evenodd"
+                d="M12 24c6.627 0 12-5.373 12-12S18.627 0 12 0 0 5.373 0 12s5.373 12 12 12Zm3.744-18.41c.182-.647-.446-1.03-1.02-.621l-8.008 5.705c-.622.443-.524 1.326.147 1.326h2.109v-.016h4.11l-3.35 1.181-1.476 5.245c-.182.647.446 1.03 1.02.621l8.008-5.705c.622-.443.524-1.326-.147-1.326H13.94l1.805-6.41Z"
+                clip-rule="evenodd"></path>
+        </svg>
+        <h3>IES Yazılım</h3>
+    </div>
+    <ul class="mobile_navLinks">
+        <li *ngFor="let item of navItems" [routerLink]="item.link" routerLinkActive="mobile_active"
+            class="mobile_navLink">
+            <i ngClass="{{item.icon}}"></i>
+            <span>{{item.title}}</span>
+        </li>
+
+    </ul>
+    <div class="mobile_logout" (click)="logout()">
+        <i class="fa-solid fa-sign-out"></i>
+        <span>Çıkış Yap</span>
+    </div>
+</div>

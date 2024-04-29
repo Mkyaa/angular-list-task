@@ -1,0 +1,6 @@
+<div class="alertContainer" *ngIf="isVisible">
+    <div class="alertBox">
+        <i [ngClass]="type === 'success' ? 'fa-regular fa-circle-check text-green-500' : 'fa-regular fa-circle-xmark  text-red-500'"></i>
+        <span class="alertText">{{ message }}</span>
+    </div>
+</div>

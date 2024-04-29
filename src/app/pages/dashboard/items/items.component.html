@@ -1,0 +1,91 @@
+<div class="itemsContainer">
+
+    <app-item-form [showForm]="showForm" [operationType]="operationType" (closeForm)="closeForm()" [item]="item"
+        (addItem)="addItem()" (updateItem)="updateItem()" (deleteItem)="deleteItem()"></app-item-form>
+
+    <div class="topBox">
+        <button class="addBtn" (click)="openForm('add')">
+            <i class="fa fa-circle-plus"></i>
+            Malzeme Ekle
+        </button>
+        <div class="searchBox">
+            <input type="text" placeholder="Search Items" (input)="searchItems($event)" />
+            <i class="fa fa-search"></i>
+        </div>
+    </div>
+    <div class="itemsList">
+        <table>
+            <thead>
+                <tr>
+                    <th>Referans Kodu</th>
+                    <th>Kart Tipi</th>
+                    <th>Kart Tipi Tanımı</th>
+                    <th>Malzeme Kodu</th>
+                    <th>Malzeme Tanımı</th>
+                    <th>Birim Set Kodu</th>
+                    <th>Yardımcı Kod</th>
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of filteredItems; let i = index">
+                    <td>
+                        <p>{{ item.dataReference}}</p>
+                    </td>
+                    <td>
+                        <p>{{ item.cardType}}</p>
+                    </td>
+                    <td>
+                        <p id="cardTypeDefinition" appItems>{{ item.cardTypeDefinition}}</p>
+                    </td>
+                    <td>
+                        <p>{{ item.code}}</p>
+                    </td>
+                    <td>
+                        <p>{{ item.name}}</p>
+                    </td>
+                    <td>
+                        <p>{{ item.unitsetCode}}</p>
+                    </td>
+                    <td>
+                        <p>{{ item.auxilCode}}</p>
+                    </td>
+                    <td>
+                        <div class="actions">
+                            <button class="editBtn" (click)="openForm('edit', item)">
+                                <i class="fa fa-edit"></i>
+                            </button>
+                            <button class="deleteBtn" (click)="openForm('delete', item)">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </div>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="12">
+                        <div class="pagination">
+                            <div class="pageInfo">
+                                <input id="currentPage" type="text" (change)="changePage($event)"
+                                    [(ngModel)]="currentPage" />
+                                <span>/</span>
+                                <span>{{ maxPage }}</span>
+                                <i class="fa-solid fa-angle-left" (click)="prevPage()"></i>
+                                <i class="fa-solid fa-angle-right" (click)="nextPage()"></i>
+                            </div>
+                            <div class="pageSelect">
+                                <span>Satır Sayısı:</span>
+                                <select (change)="changePageSize($event)">
+                                    <option value="10" selected>10</option>
+                                    <option value="20">20</option>
+                                    <option value="50">50</option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
