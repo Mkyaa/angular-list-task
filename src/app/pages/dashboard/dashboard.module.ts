@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DashboardComponent } from './dashboard.component';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+
+//components
+import { DashboardComponent } from './dashboard.component';
 import { TopBarComponent } from '../../components/top-bar/top-bar.component';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
-import { FormsModule } from '@angular/forms';
 
 
 @NgModule({

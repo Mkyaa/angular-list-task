@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ItemsComponent } from './items.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { ItemsDirective } from '../../../directives/items.directive';
+
+//components
+import { ItemsComponent } from './items.component';
 import { ItemFormComponent } from '../../../components/item-form/item-form.component';
+
+//directives
+import { ItemsDirective } from '../../../directives/items.directive';
 
 @NgModule({
   declarations: [

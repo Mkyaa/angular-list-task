@@ -1,9 +1,15 @@
 import { Component } from '@angular/core';
+
+//router
 import { Router } from '@angular/router';
+
+//services
 import { AlertService } from '../../../services/alert.service';
 import { AuthService } from '../../../services/auth.service';
-import { User } from '../../../models/user.model';
 import { TokenService } from '../../../services/token.service';
+
+//models
+import { User } from '../../../models/user.model';
 
 @Component({
   selector: 'app-login',
@@ -25,6 +31,7 @@ export class LoginComponent {
     private tokenService: TokenService
   ) { }
 
+  //login işlemi
   login(event: Event) {
     const form = event.target as HTMLFormElement;
     const formData = new FormData(form);
@@ -32,7 +39,6 @@ export class LoginComponent {
     const email = formData.get('email');
     const password = formData.get('password');
     const rememberMe = formData.get('rememberMe');
-    console.log('rememberMe', rememberMe);
 
     if (email !== null && password !== null) {
       const user: User = {

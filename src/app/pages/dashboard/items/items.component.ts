@@ -1,10 +1,18 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Item } from '../../../models/items.models';
-import { environment } from '../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
+
+//models
+import { Item } from '../../../models/items.models';
+
+//environment
+import { environment } from '../../../../environments/environment';
+
+//services
 import { TokenService } from '../../../services/token.service';
 import { AlertService } from '../../../services/alert.service';
-import { Observable } from 'rxjs';
+
+//excel export
+import * as XLSX from 'xlsx';
 
 
 @Component({
@@ -36,25 +44,8 @@ export class ItemsComponent implements OnInit {
     this.getItems(this.params.Page, this.params.PageSize);
   }
 
-  // getItems(page: string, pageSize: string) {
-  //   this.http.get<Item[]>(`${environment.apiURL}app/item?Page=${this.params.Page}&PageSize=${this.params.PageSize}`, {
-  //     headers: {
-  //       Authorization: `Bearer ${this.token}`
-  //     }
-  //   }).subscribe({
-  //     next: (res: any) => {
-  //       console.log(res);
-  //       this.items = res.rows;
-  //       this.totalElement = res.totalElement;
-  //       this.maxPage = res.maxPage;
-  //       this.currentPage = res.currentPage;
-  //     },
-  //     error: (err) => {
-  //       console.error(err);
-  //     }
-  //   });
-  // }
 
+  //GET ITEMS FUNCTION
   getItems(page: string, pageSize: string) {
     if (this.searchValue === '') {
       this.http.get<Item[]>(`${environment.apiURL}app/item?Page=${this.params.Page}&PageSize=${this.params.PageSize}`, {
@@ -63,7 +54,6 @@ export class ItemsComponent implements OnInit {
         }
       }).subscribe({
         next: (res: any) => {
-          console.log(res);
           this.filteredItems = res.rows;
           this.totalElement = res.totalElement;
           this.maxPage = res.maxPage;
@@ -78,16 +68,16 @@ export class ItemsComponent implements OnInit {
         }
       }).subscribe({
         next: (res: any) => {
-          console.log(res);
           const clearItems = res.rows.filter((item: Item) => {
-            return item.name.toLowerCase().includes(this.searchValue.toLowerCase()) 
+            return item.name.toLowerCase().includes(this.searchValue.toLowerCase())
+              || item.code.toLowerCase().includes(this.searchValue.toLowerCase())
+              || item.unitsetCode.toLowerCase().includes(this.searchValue.toLowerCase())
+              || item.auxilCode.toLowerCase().includes(this.searchValue.toLowerCase());
           });
-          //clearItems adjust page and page size
           this.filteredItems = clearItems.slice((parseInt(this.params.Page) - 1) * parseInt(this.params.PageSize), parseInt(this.params.PageSize) * parseInt(this.params.Page));
           this.totalElement = clearItems.length;
           this.maxPage = Math.ceil(clearItems.length / parseInt(this.params.PageSize));
           this.currentPage = parseInt(this.params.Page);
-          this.params.Page = '1';
           if (this.filteredItems.length === 0) {
             this.alertService.showMessage('Arama sonucu boş', 'warning');
           }
@@ -95,8 +85,9 @@ export class ItemsComponent implements OnInit {
       });
     }
   }
-            
 
+  //PAGINATION FUNCTIONS
+  //bir sonraki sayfaya geçme
   nextPage() {
     if (parseInt(this.params.Page) < this.maxPage) {
       this.params.Page = (parseInt(this.params.Page) + 1).toString();
@@ -104,6 +95,7 @@ export class ItemsComponent implements OnInit {
     }
   }
 
+  //bir önceki sayfaya geçme
   prevPage() {
     if (parseInt(this.params.Page) > 1) {
       this.params.Page = (parseInt(this.params.Page) - 1).toString();
@@ -111,12 +103,14 @@ export class ItemsComponent implements OnInit {
     }
   }
 
+  //sayfa numarasındaki inputa girilen değere göre sayfaya gitme
   changePageSize(event: any) {
     this.params.PageSize = event.target.value;
     this.params.Page = '1';
     this.getItems(this.params.Page, this.params.PageSize);
   }
 
+  //optionlardan seçilen sayfaya gitme
   changePage(event: any) {
     if (parseInt(event.target.value) > 0 && parseInt(event.target.value) <= this.maxPage) {
       this.params.Page = event.target.value;
@@ -127,6 +121,9 @@ export class ItemsComponent implements OnInit {
     }
   }
 
+  //END PAGINATION FUNCTIONS
+
+  // -------------------------------------
 
   //FORMS FUNCTIONS
 
@@ -139,6 +136,7 @@ export class ItemsComponent implements OnInit {
     auxilCode: ''
   };
 
+  //form açma 
   openForm(operationType: string, item?: Item) {
     this.showForm = true;
     this.operationType = operationType;
@@ -147,6 +145,7 @@ export class ItemsComponent implements OnInit {
     }
   }
 
+  //formu kapatma
   closeForm() {
     this.showForm = false;
     this.operationType = '';
@@ -158,8 +157,8 @@ export class ItemsComponent implements OnInit {
     };
   }
 
+  //malzeme ekleme 
   addItem() {
-    console.log(this.item);
     this.http.post(`${environment.apiURL}app/item`, this.item, {
       headers: {
         Authorization: `Bearer ${this.token}`
@@ -167,7 +166,6 @@ export class ItemsComponent implements OnInit {
     }).subscribe({
       next: (res: any) => {
         this.alertService.showMessage('Kayıt başarılı', 'success');
-        console.log(this.item);
         this.getItems('1', this.params.PageSize);
         this.closeForm();
       },
@@ -179,8 +177,8 @@ export class ItemsComponent implements OnInit {
     });
   }
 
+  //malzeme güncelleme
   updateItem() {
-    console.log(this.item);
     this.http.put(`${environment.apiURL}app/item/${this.item.code}`, this.item, {
       headers: {
         Authorization: `Bearer ${this.token}`
@@ -199,6 +197,7 @@ export class ItemsComponent implements OnInit {
     });
   }
 
+  //malzeme silme
   deleteItem() {
     this.http.delete(`${environment.apiURL}app/item/${this.item.code}`, {
       headers: {
@@ -220,13 +219,26 @@ export class ItemsComponent implements OnInit {
 
   //END FORMS FUNCTIONS
 
-
+  // -------------------------------------
 
   //SEARCH FUNCTION
 
+  //arama fonksiyonu
   searchItems(event: any) {
     this.searchValue = event.target.value.toLowerCase();
     this.getItems(this.params.Page, this.params.PageSize);
+  }
+
+
+  // -------------------------------------
+
+  // EXCEL EXPORT FUNCTION
+
+  exportExcel(): void {
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(document.getElementById('itemsTable'));
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+    XLSX.writeFile(wb, 'liste.xlsx');
   }
 
 }

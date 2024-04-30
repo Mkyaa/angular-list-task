@@ -4,17 +4,23 @@
         (addItem)="addItem()" (updateItem)="updateItem()" (deleteItem)="deleteItem()"></app-item-form>
 
     <div class="topBox">
-        <button class="addBtn" (click)="openForm('add')">
-            <i class="fa fa-circle-plus"></i>
-            Malzeme Ekle
-        </button>
+        <div class="btnBox">
+            <button class="addBtn" (click)="openForm('add')">
+                <i class="fa fa-circle-plus"></i>
+                Malzeme Ekle
+            </button>
+            <button class="excelBtn" (click)="exportExcel()">
+                <i class="fa fa-file-excel"></i>
+                Listeyi Excel'e Aktar
+            </button>
+        </div>
         <div class="searchBox">
             <input type="text" placeholder="Search Items" (input)="searchItems($event)" />
             <i class="fa fa-search"></i>
         </div>
     </div>
     <div class="itemsList">
-        <table>
+        <table id="itemsTable">
             <thead>
                 <tr>
                     <th>Referans Kodu</th>

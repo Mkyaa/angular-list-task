@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+
+//Router
 import { Router } from '@angular/router';
+
+//services
+import { AuthService } from '../../services/auth.service';
 import { AlertService } from '../../services/alert.service';
 import { TokenService } from '../../services/token.service';
 
@@ -19,6 +23,7 @@ export class NavbarComponent {
 
   isMobileMenuOpen: boolean = false;
 
+  //linkler ve iconlar
   navItems: NavItem[] = [
     { link: '#', title: 'Anasayfa', icon: 'fa-solid fa-house' },
     { link: '#', title: 'Kullanıcılar', icon: 'fa-solid fa-user' },
@@ -36,10 +41,12 @@ export class NavbarComponent {
     private tokenService: TokenService
   ) { }
 
+  //mobile menu aç kapa
   toggleMobileMenu() {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
   }
 
+  //çıkış yap
   logout() {
     this.authService.logout().subscribe(() => {
       this.alertService.showMessage('Çıkış yapıldı', 'success');

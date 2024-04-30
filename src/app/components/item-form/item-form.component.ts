@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+
+//models
 import { Item } from '../../models/items.models';
 
 @Component({
@@ -6,6 +8,7 @@ import { Item } from '../../models/items.models';
   templateUrl: './item-form.component.html',
   styleUrl: './item-form.component.css'
 })
+
 export class ItemFormComponent {
 
   @Input() showForm : boolean;

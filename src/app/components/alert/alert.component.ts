@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+
+//services
 import { AlertService } from '../../services/alert.service';
 
 @Component({
@@ -7,12 +9,15 @@ import { AlertService } from '../../services/alert.service';
   styleUrl: './alert.component.css'
 })
 export class AlertComponent implements OnInit {
+  
   message: string = '';
   type: string = '';
   isVisible: boolean = false;
 
   constructor(private alertService: AlertService) { }
 
+  //ALERT FUNCTION
+  //kaç saniye sonra kaybolacağını belirliyoruz
   ngOnInit() {
     this.alertService.getMessage().subscribe((message) => {
       this.message = message.message;

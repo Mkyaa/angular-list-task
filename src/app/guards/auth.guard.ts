@@ -1,9 +1,15 @@
 import { Injectable } from '@angular/core';
+
+//router
 import { CanActivate, Router } from '@angular/router';
+
+//services
 import { AuthService } from '../services/auth.service';
+import { AlertService } from '../services/alert.service';
+
+//rxjs
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import { AlertService } from '../services/alert.service';
 
 @Injectable({
     providedIn: 'root'
@@ -16,6 +22,7 @@ export class AuthGuard implements CanActivate {
         private alertService: AlertService
     ) { }
 
+    //giriş yapmış mı kontrolü
     canActivate(): Observable<boolean> {
         return this.authService.isAuthenticated().pipe(
             take(1),

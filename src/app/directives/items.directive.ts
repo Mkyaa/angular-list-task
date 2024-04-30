@@ -1,5 +1,4 @@
 import { AfterViewInit, Directive, ElementRef } from '@angular/core';
-import e from 'express';
 
 @Directive({
   selector: '[appItems]'
@@ -8,10 +7,9 @@ export class ItemsDirective implements AfterViewInit {
 
   text: string = '';
 
-  constructor(private el: ElementRef) {
-    console.log(el.nativeElement.textContent);
-  }
+  constructor(private el: ElementRef) {}
 
+  //Malzeme kart tipine göre arkaplan rengi ve border rengi ayarlama
   ngAfterViewInit() {
     this.text = this.el.nativeElement.textContent;
     if (this.text.includes('(TM)')) {
