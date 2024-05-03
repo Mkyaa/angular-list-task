@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
 //rxjs
-import { Observable } from 'rxjs';
+import { Observable, catchError, map, of, tap } from 'rxjs';
 
 //models
 import { User } from '../models/user.model';
@@ -30,6 +30,7 @@ export class AuthService {
 
   //logout
   logout(): Observable<any> {
+    this.tokenService.clearToken();
     return this.http.get(`${environment.apiURL}account/logout`);
   }
 
@@ -44,4 +45,36 @@ export class AuthService {
       observer.complete();
     });
   }
+
+  //check token validity
+  checkTokenValidity() {
+    const expirationDate = localStorage.getItem('tokenExpiration');
+    if (expirationDate) {
+      const now = new Date().getTime();
+      const expiresIn = +expirationDate - now;
+      if (expiresIn > 0) {
+        // Token hala geçerli, yenileme işlemi gerekli değil
+        return of (true);
+      } else {
+        // Token süresi dolmuş, yenileme işlemi gerekiyor
+        return this.tokenService.refreshToken().pipe(
+          tap((response: any) => {
+            this.tokenService.setToken(response.access_token);
+            localStorage.setItem('tokenExpiration', (now + (response.expires_in * 1000)).toString());
+          }),
+          map(() => true),
+          catchError(() => {
+            // Token yenileme başarısız, oturumu sonlandır
+            this.logout();
+            return of(false);
+          })
+        );
+      }
+    } else {
+      // Token süresi bilgisi yok, oturumu sonlandır
+      this.logout();
+      return of(false);
+    }
+  }
+  
 }

@@ -65,14 +65,19 @@ export class LoginComponent {
       });
 
       this.tokenService.getToken(user.userNameOrEmailAddress, user.password).subscribe({
-        next: (token: any) => {
-          this.tokenService.setToken(token.access_token);
+        next: (tokens: any) => {
+          console.log(tokens);
+          this.tokenService.setToken(tokens.access_token);
+          localStorage.setItem('refreshToken', tokens.refresh_token); // refresh_token'ı localStorage'a kaydet
+          const now = new Date().getTime();
+          const expirationTime = now + (tokens.expires_in * 1000);
+          localStorage.setItem('tokenExpiration', expirationTime.toString()); // Token süresini localStorage'a kaydet
           this.router.navigate(['dashboard/items']);
         },
         error: (err) => {
           console.error(err);
         }
-      });
+      });      
     }
   }
 }

@@ -12,29 +12,30 @@ import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
 
-    constructor(
-        private authService: AuthService,
-        private router: Router,
-        private alertService: AlertService
-    ) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private alertService: AlertService
+  ) { }
 
-    //giriş yapmış mı kontrolü
-    canActivate(): Observable<boolean> {
-        return this.authService.isAuthenticated().pipe(
-            take(1),
-            map((isAuthenticated: boolean) => {
-                if (isAuthenticated) {
-                    return true;
-                } else {
-                    this.router.navigate(['auth/login']);
-                    this.alertService.showMessage('Bu sayfayı görüntülemek için giriş yapmalısınız', 'error');
-                    return false;
-                }
-            })
-        );
-    }
+  //giriş yapmış mı kontrolü
+  canActivate(): Observable<boolean> {
+    return this.authService.checkTokenValidity().pipe(
+      take(1),
+      map((isValid: boolean) => {
+        if (isValid) {
+          return true;
+        } else {
+          this.router.navigate(['auth/login']);
+          this.alertService.showMessage('Bu sayfayı görüntülemek için giriş yapmalısınız', 'error');
+          return false;
+        }
+      })
+    );
+  }
+  
 }

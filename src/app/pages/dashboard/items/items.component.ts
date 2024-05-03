@@ -47,6 +47,12 @@ export class ItemsComponent implements OnInit {
 
   //GET ITEMS FUNCTION
   getItems(page: string, pageSize: string) {
+    const token = this.tokenService.getTokenValue();
+    if (!token) {
+      console.error('Token yok.');
+      return;
+    }
+
     if (this.searchValue === '') {
       this.http.get<Item[]>(`${environment.apiURL}app/item?Page=${this.params.Page}&PageSize=${this.params.PageSize}`, {
         headers: {
